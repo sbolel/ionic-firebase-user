@@ -29,7 +29,7 @@ userModuleService.service('UserService',['$log', '$q', '$firebaseAuth', 'FBURL',
     getRef: function() {
       return currentUser.$ref();
     },
-    createUser: function(user, successCb, errorCb){
+    createAndLoginUserWithPassword: function(user, successCb, errorCb){
       self.logout();
       _authObj.$createUser({
         email: user.email,

@@ -52,10 +52,5 @@ userModuleFactory.factory('UserFactory', ['$rootScope', '$firebaseAuth', '$fireb
       this.$destroy();
       this.$auth.$unauth();
     }
-    // $authWithCustomToken("<CUSTOM_AUTH_TOKEN>").then(function(authData) {
-    //   $log.log("Logged in as:", authData.uid);
-    // }).catch(function(error) {
-    //   $log.error("Authentication failed:", error);
-    // });
   });
 }]);

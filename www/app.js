@@ -26,51 +26,6 @@ angular.module('firekitApp', [
   .state('app', {
     url: '/',
     templateUrl: "templates/menu.html"
-  })
-
-  .state('user', {
-    url: '/u',
-    abstract: true,
-    controller: 'UserCtrl',
-    templateUrl: "templates/menu.html"
-  })
-  .state('user.account', {
-    url: '',
-    views: {
-      'menuContent': {
-        templateUrl: 'src/user/templates/user.account.html'
-      }
-    },
-    resolve: {
-      currentAuth: function(UserService) {
-        return UserService.requireAuth();
-      }
-    }
-  })
-  .state('user.signup', {
-    url: '/signup',
-    views: {
-      'menuContent': {
-        templateUrl: 'src/user/templates/user.signup.html'
-      }
-    }
-  })
-  .state('user.login', {
-    url: '/login',
-    views: {
-      'menuContent': {
-        templateUrl: 'src/user/templates/user.login.html'
-      }
-    }
-  })
-  .state('user.logout', {
-    url: '/logout',
-    template: '<ui-view/>',
-    controller: function($log, $state, UserService) {
-      $log.debug("Logging out.");
-      UserService.logout();
-      $state.go('user.login',{alert: 'You have been logged out.'})
-    }
   });
 
   $urlRouterProvider.otherwise('/u');
