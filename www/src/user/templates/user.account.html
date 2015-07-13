@@ -1,45 +1,43 @@
-<ion-view view-title="Account">
-    <md-content class="md-padding" ng-if="userData && userData.provider !== 'anonymous'">
-      <form name="userForm">
-        <div layout layout-md="column">
-          <md-input-container flex>
-            <label>First Name</label>
-            <input ng-model="$root.userData.name.first">
-          </md-input-container>
-          <md-input-container flex>
-            <label>Last Name</label>
-            <input ng-model="$root.userData.name.last">
-          </md-input-container>
-        </div>
-        <md-input-container flex>
-          <label>Email</label>
+<ion-view view-title="Profile">
+  <ion-content>
+    <div ng-if="userData && userData.provider !== 'anonymous'">
+      <form name="userForm" class="list">
+        <label class="item item-input item-floating-label">
+          <span>First Name</span>
+          <input type="text" ng-model="$root.userData.name.first">
+        </label>
+        <label class="item item-input item-floating-label">
+          <span>Last Name</span>
+          <input type="text" ng-model="$root.userData.name.last">
+        </label>
+        <label class="item item-input item-floating-label">
+          <span>Email</span>
           <input type="email" ng-model="$root.userData.email">
-        </md-input-container>
-        <div layout layout-md="column">
-          <md-input-container flex>
-            <label>City</label>
-            <input ng-model="$root.userData.city">
-          </md-input-container>
-          <md-input-container flex>
-            <label>State</label>
-            <input ng-model="$root.userData.state">
-          </md-input-container>
-          <md-input-container flex>
-            <label>Postal Code</label>
-            <input ng-model="$root.userData.zip">
-          </md-input-container>
-        </div>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span>City</span>
+          <input type="text" ng-model="$root.userData.city">
+        </label>
+        <label class="item item-input item-floating-label">
+          <span>State</span>
+          <input type="text" ng-model="$root.userData.state">
+        </label>
+        <label class="item item-input item-floating-label">
+          <span>Postal Code</span>
+          <input type="number" ng-model="$root.userData.zip">
+        </label>
       </form>
-    </md-content>
-
-    <md-content ng-if="userData && userData.provider === 'anonymous'" layout="column" layout-align="center center" layout-fill>
-      <h4>To view your profile</h4>
-      <md-button ui-sref="user.login" class="md-primary">Sign in</md-button>
-      <small>or</small>
-      <md-button ui-sref="user.signup" class="md-accent">Create an Account</md-button>
-    </md-content>
-
-    <md-content ng-if="!userData" layout="column" layout-align="center center" layout-fill>
+    </div>
+    <div ng-if="userData && userData.provider === 'anonymous'" class="center">
+      <div class="list">
+        <span>To view your profile,</span>
+        <button ui-sref="user.login" class="button button-full button-dark">Sign in</button>
+        <span>or</span>
+        <button ui-sref="user.signup" class="button button-full button-balanced">Create an Account</button>
+      </div>
+    </div>
+    <div ng-if="!userData" class="center">
       <ion-spinner icon="ripple"></ion-spinner>
-    </md-content>
+    </div>
+  </ion-content>
 </ion-view>

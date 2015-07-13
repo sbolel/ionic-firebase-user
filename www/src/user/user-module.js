@@ -60,53 +60,49 @@ userModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
 
 userModule.controller('UserCtrl', ['$log', '$scope', '$state', '$ionicPopup', 'UserService', function($log, $scope, $state, $ionicPopup, UserService) {
 
-  var showAccountErrorAlert = function(errorObj) {
-    var alertPopup = $ionicPopup.alert({
+  var alerts = {
+    authFailed: {
       title: 'Sorry!',
-      template: 'The email/password combination is incorrect'
-    });
-    alertPopup.then(function(res) {
-      $log.error("Login error:",errorObj);
-    });
+      template: 'The email/password combination is incorrect.'
+    },
+    inputsMissing: {
+      title: 'Oops!',
+      template: 'Please enter both an email and password to continue.'
+    }
   }
 
-  var showMissingInputAlert = function(errorObj){
-    alert("Please enter your email and password to log in.");
-    var alertPopup = $ionicPopup.alert({
-      title: 'Oops!',
-      template: 'Please enter both an email and password.'
-    });
-    alertPopup.then(function(res) {
-      $log.error("Login error:",errorObj);
-    });
+  var authSuccessCallback = function() {
+    $state.go('user.account');
+  };
+
+  var authFailureCallback = function(error) {
+    var alertPopup = $ionicPopup.alert(alerts.authFailed);
+  };
+
+  var userFormIsValid = function(){
+    return $scope.incomingUser.email && $scope.incomingUser.password;
+  };
+
+  var processUserInput = function(callback) {
+    if(userFormIsValid()) {
+      callback($scope.incomingUser, authSuccessCallback, authFailureCallback);
+    } else {
+      var alertPopup = $ionicPopup.alert(alerts.inputsMissing);
+    }
   }
 
   $scope.incomingUser = {};
 
   $scope.loginWithPassword = function() {
-    if($scope.incomingUser.email && $scope.incomingUser.password) {
-      UserService.loginWithPassword($scope.incomingUser, function() {
-        // success, go to account
-        $state.go('user.account');
-      }, function(error){
-        showAccountErrorAlert(error);
-      });
-    } else {
-      showMissingInputAlert();
-    }
+    processUserInput(UserService.loginWithPassword);
   };
 
   $scope.signupWithPassword = function() {
-    if($scope.incomingUser.email && $scope.incomingUser.password) {
-      UserService.createAndLoginUserWithPassword($scope.incomingUser, function() {
-        // success, go to account
-        $state.go('user.account');
-      }, function(error){
-        showAccountErrorAlert(error);
-      });
-    } else {
-      showMissingInputAlert();
-    }
+    processUserInput(UserService.createAndLoginUserWithPassword);
+  };
+
+  $scope.init = function() {
+    
   };
 
 }]);

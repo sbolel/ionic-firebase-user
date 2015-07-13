@@ -18,6 +18,9 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item menu-close ui-sref="user.signup" ng-if="$root.userData && $root.userData.provider!=='anonymous'">
+          Profile
+        </ion-item>
         <ion-item menu-close ui-sref="user.login">
           Login
         </ion-item>
