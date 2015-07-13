@@ -1,4 +1,10 @@
-angular.module('firekitApp', ['ionic', 'firekitApp.controllers'])
+angular.module('firekitApp', [
+  'ionic',
+  'firebase',
+  'ngMaterial',
+  'firekitApp.user',
+  'firekitApp.config',
+  ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,48 +24,55 @@ angular.module('firekitApp', ['ionic', 'firekitApp.controllers'])
   $stateProvider
 
   .state('app', {
-    url: "/app",
+    url: '/',
+    templateUrl: "templates/menu.html"
+  })
+
+  .state('user', {
+    url: '/u',
     abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppController'
+    controller: 'UserCtrl',
+    templateUrl: "templates/menu.html"
   })
-
-  .state('app.search', {
-    url: "/search",
+  .state('user.account', {
+    url: '',
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: 'src/user/templates/user.account.html'
+      }
+    },
+    resolve: {
+      currentAuth: function(UserService) {
+        return UserService.requireAuth();
       }
     }
   })
-
-  .state('app.browse', {
-    url: "/browse",
+  .state('user.signup', {
+    url: '/signup',
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: 'src/user/templates/user.signup.html'
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+  .state('user.login', {
+    url: '/login',
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: 'src/user/templates/user.login.html'
       }
+    }
+  })
+  .state('user.logout', {
+    url: '/logout',
+    template: '<ui-view/>',
+    controller: function($log, $state, UserService) {
+      $log.debug("Logging out.");
+      UserService.logout();
+      $state.go('user.login',{alert: 'You have been logged out.'})
     }
   });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+
+  $urlRouterProvider.otherwise('/u');
+
 });

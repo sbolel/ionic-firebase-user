@@ -1,14 +1,13 @@
 {
-  "name": "firekit-ionic-user",
+  "name": "ionic-firebase-user",
   "version": "1.0.0",
-  "description": "firekit-ionic-user: An Ionic project",
+  "description": "Ionic Template for Firebase User management",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/sbolel/firekit-ionic-user"
+    "url": "https://bitbucket.org/sbolel/ionic-firebase-user"
   },
   "keywords": [
-    "Firekit",
     "Firebase",
     "Ionic",
     "users",

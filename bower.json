@@ -1,6 +1,6 @@
 {
-  "name": "firekit-ionic-user",
-  "description": "User management plugin for Ionic + Firebase",
+  "name": "ionic-firebase-user",
+  "description": "User management template for Ionic + Firebase",
   "author": "Sinan Bolel <sinanbolel@gmail.com> (http://sinanbolel.com)",
   "private": "true",
   "keywords": [
@@ -19,6 +19,7 @@
     "angular-material": "~0.10.0",
     "angular-sanitize": "~1.4.2",
     "ionic": "~1.0.1",
-    "angular-animate": "~1.4.2"
+    "angular-animate": "~1.4.2",
+    "angularfire": "~1.1.2"
   }
 }

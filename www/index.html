@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="description" content="Firekit devTools">
     <meta name="author" content="Sinan Bolel <sinanbolel@gmail.com>">
-    <meta name="keywords" content="Firekit, Firebase, tools, users, authentication">
+    <meta name="keywords" content="Firekit, Firebase, Ionic, tools, user, auth, authentication">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
     <link rel="stylesheet" href="lib/ionic/css/ionic.css" />
     <!-- endbower -->
-    <link href="assets/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/app.css">
     <!-- bower:js -->
     <script src="lib/firebase/firebase.js"></script>
     <script src="lib/angular/angular.js"></script>
@@ -22,10 +22,15 @@
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="lib/ionic/js/ionic.js"></script>
     <script src="lib/ionic/js/ionic-angular.js"></script>
+    <script src="lib/angularfire/dist/angularfire.js"></script>
     <!-- endbower -->
     <script src="cordova.js"></script>
     <script src="app.js"></script>
-    <script src="app-controllers.js"></script>
+    <script src="app-config.js"></script>
+    <script src="src/user/user-module.js"></script>
+    <script src="src/user/user-config.js"></script>
+    <script src="src/user/user-factory.js"></script>
+    <script src="src/user/user-service.js"></script>
   </head>
 
   <body ng-app="firekitApp">
